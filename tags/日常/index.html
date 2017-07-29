@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: 日常 | Star &amp; Future</title>
+  <title>Mot-clé: 日常 | Star &amp; Future</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="Star &amp; Future">
@@ -72,7 +72,7 @@
       </nav>
       <nav id="sub-nav">
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://starfuture.xyz"></form>
@@ -127,7 +127,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dagger/">dagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日常/">日常</a></li></ul>
     </div>
@@ -137,7 +137,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/dagger/" style="font-size: 10px;">dagger</a> <a href="/tags/kotlin/" style="font-size: 10px;">kotlin</a> <a href="/tags/日常/" style="font-size: 10px;">日常</a>
     </div>
@@ -156,7 +156,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -181,11 +181,52 @@
     <div class="outer">
         <div id="footer-info" class="inner">
             &copy; 2017 西野奈留<br>
-            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+            Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
         </div>
     </div>
 
+    <span id="visits">Visits: <font class="count"></font></span>
+    <span id="pageviews">Pageviews: <font class="count"></font></span>
 
+    <html>
+    <head>
+        <script src="https://www.gstatic.com/firebasejs/4.1.5/firebase.js"></script>
+    </head>
+    <body>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyD9Zl5VSocjVHck0dW3uJpDrnaJO747H54",
+            authDomain: "hexoblog-ed7d4.firebaseapp.com",
+            databaseURL: "https://hexoblog-ed7d4.firebaseio.com",
+            projectId: "hexoblog-ed7d4",
+            storageBucket: "",
+            messagingSenderId: "247967155395"
+        };
+        firebase.initializeApp(config);
+
+        var database = firebase.database();
+        var oriUrl = window.location.host;
+        var curUrl = oriUrl + window.location.pathname;
+        function readVisits(url, selector) {
+            var db_key = decodeURI(url.replace(new RegExp('\\/|\\.', 'g'), "_"));
+            database.ref(db_key).once("value").then(function (result) {
+                var count = parseInt(result.val() || 0) + 1;
+                database.ref(db_key).set(count);
+                if (selector.length > 0) {
+                    selector.html(count);
+                }
+                ;
+            });
+        }
+        readVisits(oriUrl, $("#visits.count"));
+        if (curUrl && curUrl != "_") {
+            readVisits("page/" + curUrl, $("#pageviews.count"));
+        }
+
+    </script>
+    </body>
+    </html>
 
 
 </footer>
