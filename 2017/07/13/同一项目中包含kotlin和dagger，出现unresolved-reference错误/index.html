@@ -117,7 +117,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://starfuture.xyz/2017/07/13/同一项目中包含kotlin和dagger，出现unresolved-reference错误/" data-id="cj5ou83jp0002ul16dru2hwkf" class="article-share-link">Share</a>
+      <a data-url="http://starfuture.xyz/2017/07/13/同一项目中包含kotlin和dagger，出现unresolved-reference错误/" data-id="cj5ov4jwk0002ws164kwlyu43" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dagger/">dagger</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
@@ -204,10 +204,11 @@
             &copy; 2017 西野奈留<br>
             Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
         </div>
-    </div>
 
-    <span id="visits">Visits: <font class="count"></font></span>
-    <span id="pageviews">Pageviews: <font class="count"></font></span>
+        <span id="visits">Visits: <font class="count"></font></span>
+        <span id="pageviews">Pageviews: <font class="count"></font></span>
+
+    </div>
 
     <html>
     <head>
@@ -220,9 +221,7 @@
             apiKey: "AIzaSyD9Zl5VSocjVHck0dW3uJpDrnaJO747H54",
             authDomain: "hexoblog-ed7d4.firebaseapp.com",
             databaseURL: "https://hexoblog-ed7d4.firebaseio.com",
-            projectId: "hexoblog-ed7d4",
-            storageBucket: "",
-            messagingSenderId: "247967155395"
+            storageBucket: "gs://hexoblog-ed7d4.appspot.com/"
         };
         firebase.initializeApp(config);
 
@@ -237,12 +236,11 @@
                 if (selector.length > 0) {
                     selector.html(count);
                 }
-                ;
             });
         }
-        readVisits(oriUrl, $("#visits .count"));
-        if (curUrl != "_") {
-            readVisits("page/" + curUrl, $("#pageviews .count"));
+        readVisits(oriUrl, $("#visits").find(".count"));
+        if (curUrl !== "_") {
+            readVisits("page/" + curUrl, $("#pageviews").find(".count"));
         }
 
     </script>
